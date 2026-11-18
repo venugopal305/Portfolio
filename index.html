@@ -1,0 +1,431 @@
+<title>Venugopal K M Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio of Venugopal K M, a full-stack software developer in Bengaluru building trading and fintech web applications with Angular, Node.js and PostgreSQL.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: sticky bar, split hero (intro + profile.ts card) over a dotted grid, stat strip, then sections with a left label rail on wide screens */
+:root {
+  --radius: .875rem;
+  --bg: oklch(99.5% .002 240);
+  --surface: oklch(100% 0 0);
+  --ink: oklch(22% .045 260);
+  --muted: oklch(52% .03 258);
+  --line: oklch(91.5% .012 250);
+  --navy: oklch(23% .055 262);
+  --navy-ink: oklch(97% .008 240);
+  --accent: oklch(55% .17 258);
+  --accent-2: oklch(68% .13 183);
+  --accent-ink: oklch(19% .05 262);
+  --soft: oklch(95.5% .01 240);
+  --glass: color-mix(in srgb, var(--bg) 82%, transparent);
+  --grad-hero: linear-gradient(135deg, oklch(23% .055 262), oklch(32% .09 265));
+  --grad-accent: linear-gradient(100deg, oklch(68% .13 183), oklch(60% .15 235));
+  --shadow-card: 0 1px 2px oklch(23% .055 262 / .06), 0 12px 32px -16px oklch(23% .055 262 / .22);
+  --shadow-glow: 0 20px 60px -24px oklch(68% .13 183 / .55);
+  --gain: #0E7A4F;
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: oklch(17% .04 262); --surface: oklch(22% .045 262); --ink: oklch(96% .008 240); --muted: oklch(72% .03 255); --line: oklch(32% .04 262);
+    --accent: oklch(72% .14 255); --accent-2: oklch(72% .13 183); --accent-ink: oklch(19% .05 262); --soft: oklch(27% .05 262); --gain: #4ADE9B;
+        color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: oklch(17% .04 262); --surface: oklch(22% .045 262); --ink: oklch(96% .008 240); --muted: oklch(72% .03 255); --line: oklch(32% .04 262);
+  --accent: oklch(72% .14 255); --accent-2: oklch(72% .13 183); --accent-ink: oklch(19% .05 262); --soft: oklch(27% .05 262); --gain: #4ADE9B;
+    color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .card, .btn { transition: none !important; } }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  background: var(--bg); z-index: 30;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+
+/* top bar */
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--glass); border-bottom: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  margin-inline: calc(50% - 50vw); padding-inline: max(16px, calc(50vw - 520px));
+}
+.theme-btn { flex: none; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; display: grid; place-items: center; font-size: 16px; line-height: 1; }
+.theme-btn:hover { border-color: var(--accent); }
+.bar-in { display: flex; align-items: center; gap: 16px; min-height: 60px; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 18px; text-decoration: none; letter-spacing: -0.01em; flex: none; }
+.mark { width: 34px; height: 34px; border-radius: 10px; background: var(--grad-accent); color: var(--accent-ink); display: grid; place-items: center; font-size: 13px; letter-spacing: 0; }
+.links { display: flex; gap: 2px; margin-left: auto; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.links::-webkit-scrollbar { display: none; }
+.links a { padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; white-space: nowrap; }
+.links a:hover { color: var(--ink); background: var(--soft); }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px;
+  font-weight: 600; font-size: 14px; text-decoration: none; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); transition: transform .15s ease, filter .15s ease;
+}
+.btn.primary { background: var(--grad-accent); color: var(--accent-ink); border-color: transparent; box-shadow: var(--shadow-glow); }
+.btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.bar .btn { padding: 8px 14px; flex: none; }
+
+/* hero */
+.hero-bg {
+  margin-inline: calc(50% - 50vw); padding-inline: max(16px, calc(50vw - 520px));
+  /* the hero is always navy, in both themes, so its text tokens are redefined for a dark ground */
+  --ink: var(--navy-ink);
+  --muted: oklch(80% .02 250);
+  --line: oklch(100% 0 0 / .14);
+  --surface: oklch(100% 0 0 / .06);
+  --soft: oklch(100% 0 0 / .1);
+  --accent: oklch(82% .12 183);
+  color: var(--ink);
+  background-image:
+    radial-gradient(520px 320px at 12% 8%, oklch(68% .13 183 / .28), transparent 70%),
+    radial-gradient(480px 300px at 88% 30%, oklch(60% .15 235 / .3), transparent 70%),
+    radial-gradient(oklch(100% 0 0 / .09) 1.2px, transparent 1.2px),
+    var(--grad-hero);
+  background-size: auto, auto, 22px 22px, auto;
+}
+.hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; padding-block: 64px 40px; align-items: center; }
+.status {
+  display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 13px;
+  color: var(--muted); border: 1px solid var(--line); background: var(--surface); padding: 6px 12px; border-radius: 999px;
+}
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--gain); display: block; }
+.hero h1 { font-size: clamp(2.3rem, 5.6vw, 3.8rem); letter-spacing: -0.03em; margin-top: 20px; }
+.hero h1 em { font-style: normal; color: var(--accent); background: var(--grad-accent); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.role { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin-top: 14px; }
+.lede { margin-top: 14px; font-size: 17px; color: var(--muted); max-width: 54ch; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--font-mono); font-size: 12.5px; padding: 3px 9px; border-radius: 6px; background: var(--soft); color: var(--accent); }
+
+.code {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; min-width: 0;
+  box-shadow: 0 30px 60px -30px var(--accent), 0 2px 0 var(--line);
+}
+.code-head { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.code-head b { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; }
+.code pre { margin: 0; padding: 18px; overflow-x: auto; font-family: var(--font-mono); font-size: 13px; line-height: 1.75; color: var(--ink); }
+.k { color: var(--accent); }
+.body .code { margin-top: 28px; max-width: 560px; }
+
+.photo { margin: 0; position: relative; width: 100%; max-width: 380px; justify-self: center; }
+.photo::before { content: ""; position: absolute; inset: 14px -14px -14px 14px; border-radius: 28px; background: var(--grad-accent); opacity: .55; }
+.photo img { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border-radius: 28px; border: 1px solid var(--line); box-shadow: var(--shadow-glow); }
+.photo figcaption { position: absolute; left: 14px; bottom: 14px; z-index: 1; font-family: var(--font-mono); font-size: 12.5px; padding: 6px 12px; border-radius: 999px; color: var(--navy-ink); background: oklch(23% .055 262 / .72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid oklch(100% 0 0 / .18); }
+.s { color: var(--muted); }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; margin-bottom: 40px; overflow: hidden; box-shadow: 0 20px 40px -30px var(--accent); }
+.stat { padding: 20px 22px; border-left: 1px solid var(--line); }
+.stat:first-child { border-left: 0; }
+.stat b { display: block; font-family: var(--font-display); font-size: 2rem; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat b { background: linear-gradient(90deg, var(--ink), var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.stat b sup { font-size: 1rem; -webkit-text-fill-color: var(--accent-2); }
+.stat span { display: block; margin-top: 6px; font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+
+/* sections */
+section { padding-block: 60px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 32px; }
+.hero-bg + .wrap section:first-child { border-top: 0; }
+.label { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 8px; }
+section h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -0.02em; margin-bottom: 26px; }
+section h2::after { content: ""; display: block; width: 56px; height: 4px; border-radius: 4px; margin-top: 12px; background: var(--grad-accent); }
+.body { min-width: 0; }
+.body p + p { margin-top: 14px; }
+.lead { font-size: 18px; max-width: 62ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-top: 28px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; min-width: 0; }
+.fact small { display: block; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+.fact span { font-weight: 600; overflow-wrap: anywhere; }
+
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px); box-shadow: var(--shadow-card); padding: 22px; min-width: 0; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 18px 36px -24px var(--accent); }
+.skill h3 { font-size: 16px; margin-bottom: 12px; }
+.skill ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
+.skill li { font-size: 13.5px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--line); }
+
+/* experience timeline */
+.jobs { position: relative; display: grid; gap: 28px; }
+.job { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 16px; position: relative; }
+.job::before { content: ""; position: absolute; left: 6px; top: 22px; bottom: -28px; width: 2px; background: var(--line); }
+.job:last-child::before { display: none; }
+.dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--accent-2); box-shadow: 0 0 0 4px var(--soft); background: var(--bg); margin-top: 7px; position: relative; z-index: 1; }
+.job-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
+.job h3 { font-size: 20px; }
+.when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.org { color: var(--accent); font-weight: 600; margin-top: 2px; }
+.job ul { margin: 14px 0 0; padding-left: 18px; color: var(--muted); }
+.job li + li { margin-top: 8px; }
+.job li strong { color: var(--ink); font-weight: 600; }
+
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.project { display: flex; flex-direction: column; gap: 10px; }
+.project.wide { grid-column: 1 / -1; }
+.project h3 { font-size: 19px; }
+.project p { color: var(--muted); font-size: 15px; }
+.project .chips { margin-top: auto; padding-top: 6px; }
+.tag { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gain); }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card h3 { font-size: 17px; }
+.card .sub { color: var(--accent); font-weight: 600; font-size: 15px; margin-top: 2px; }
+.card .meta { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+footer { padding-top: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+@media (max-width: 820px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 40px 28px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:nth-child(3) { border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  section { grid-template-columns: minmax(0, 1fr); gap: 6px; padding-block: 40px; }
+  .projects { grid-template-columns: minmax(0, 1fr); }
+  .bar-in { gap: 10px; }
+  .logo .nm { display: none; }
+  .photo { width: calc(100% - 16px); max-width: 340px; justify-self: start; }
+}
+</style>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="logo" href="#home"><span class="mark">VK</span><span class="nm">Venugopal K M</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark theme" title="Switch theme">◐</button>
+    <a class="btn primary" href="#contact">Hire me</a>
+  </div>
+</header>
+
+<div class="hero-bg" id="home">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <span class="status"><i></i> Bengaluru, India</span>
+        <h1>Hello, I'm <em>Venugopal K M</em></h1>
+        <p class="role">Full-Stack Developer</p>
+        <p class="lede">I build and ship production web applications with Angular, Node.js and PostgreSQL. Recent work includes P&amp;L, portfolio and live market-data features used by thousands of traders.</p>
+        <div class="cta">
+          <a class="btn primary" href="Venugopal_KM_Resume.pdf" target="_blank" rel="noopener">View resume</a>
+          <a class="btn" href="#contact">Get in touch</a>
+          <a class="btn" href="https://github.com/venugopal305" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/venugopal-k-m-68626325b/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <figure class="photo">
+        <img src="venugopal.jpg" width="792" height="1188" alt="Portrait of Venugopal K M in a maroon three-piece suit">
+        <figcaption>Full-Stack Developer · Bengaluru</figcaption>
+      </figure>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>3.5<sup>+</sup></b><span>years shipping production web apps</span></div>
+      <div class="stat"><b>40<sup>%</sup></b><span>lower latency on live market-data feeds</span></div>
+      <div class="stat"><b>30<sup>%</sup></b><span>higher engagement on the portfolio system</span></div>
+      <div class="stat"><b>30<sup>+</sup></b><span>trading bot versions refined by backtesting</span></div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <section id="about">
+    <div class="label">About</div>
+    <div class="body">
+      <h2>Full-stack, from the screen to the database</h2>
+      <p class="lead">Results-driven Full-Stack Developer with 3.5 years of experience designing, building, and shipping production web applications for trading and fintech platforms. Strong in Angular, Node.js, Express.js, and PostgreSQL, with a track record of delivering real-time features (P&amp;L calculation, portfolio management, and live market-data feeds) to thousands of users. Proficient in REST API design, SQL query optimization, WebSockets-based real-time streaming, and CI/CD-driven deployments, and experienced in owning production releases from configuration to post-release fixes. Collaborates closely with product managers, UI/UX designers, QA, and DevOps in Agile teams to deliver secure, high-performance applications. Also develops algorithmic trading bots in MQL5 for MetaTrader 5, refined through extensive strategy-tester backtesting.</p>
+      <div class="facts">
+        <div class="fact"><small>Based in</small><span>Bengaluru, India</span></div>
+        <div class="fact"><small>Currently</small><span>Software Developer, Credbull Exchange</span></div>
+        <div class="fact"><small>Languages</small><span>English, Kannada, Hindi</span></div>
+      </div>
+      <div class="code" aria-label="Profile summary">
+        <div class="code-head"><b></b><b></b><b></b><span>profile.ts</span></div>
+<pre><span class="k">const</span> venugopal = {
+  role: <span class="s">"Software Developer"</span>,
+  at: <span class="s">"Credbull Exchange"</span>,
+  frontend: [<span class="s">"Angular"</span>, <span class="s">"Next.js"</span>],
+  backend: [<span class="s">"Node.js"</span>, <span class="s">"Express"</span>],
+  data: [<span class="s">"PostgreSQL"</span>, <span class="s">"MongoDB"</span>, <span class="s">"Redis"</span>],
+  realtime: <span class="s">"WebSockets"</span>,
+  side: <span class="s">"MQL5 trading bots"</span>,
+};</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="label">Skills</div>
+    <div class="body">
+      <h2>What I work with</h2>
+      <div class="skill-grid">
+        <div class="card skill"><h3>Frontend</h3><ul><li>Angular</li><li>Next.js</li><li>TypeScript</li><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Angular Material</li><li>Bootstrap</li></ul></div>
+        <div class="card skill"><h3>Backend</h3><ul><li>Node.js</li><li>Express.js</li><li>REST APIs</li><li>WebSockets</li><li>Webhooks</li><li>JWT</li><li>Bcrypt</li><li>Axios</li><li>ASP.NET MVC</li></ul></div>
+        <div class="card skill"><h3>Databases</h3><ul><li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li><li>Redis</li><li>Sequelize</li><li>SQL query optimization</li></ul></div>
+        <div class="card skill"><h3>DevOps &amp; tools</h3><ul><li>CI/CD</li><li>Git</li><li>GitHub</li><li>GitLab</li><li>Bitbucket</li><li>Linux</li><li>Render</li><li>Postman</li><li>Firebase</li><li>Agile</li></ul></div>
+        <div class="card skill"><h3>Trading &amp; fintech</h3><ul><li>Algorithmic trading</li><li>MQL5</li><li>MetaTrader 5</li><li>P&amp;L calculation</li><li>Real-time market data</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="label">Experience</div>
+    <div class="body">
+      <h2>Where I've worked</h2>
+      <div class="jobs">
+        <div class="job">
+          <span class="dot"></span>
+          <div>
+            <div class="job-head"><h3>Software Developer</h3><span class="when">Jan 2025 – Present</span></div>
+            <div class="org">Credbull Exchange Pvt Ltd</div>
+            <ul>
+              <li>Led development of the Profit &amp; Loss (P&amp;L) module using Node.js and PostgreSQL, delivering real-time trade calculations and financial reporting to thousands of users.</li>
+              <li>Architected the portfolio management system (Angular, Node.js) with real-time asset performance monitoring, <strong>boosting user engagement by 30%</strong>.</li>
+              <li>Built live market-data feeds with WebSockets and REST APIs, streaming prices and trading volume and <strong>cutting data latency by 40%</strong>.</li>
+              <li>Optimized critical backend workflows and removed redundant processes, <strong>improving execution speed by 30%</strong>.</li>
+              <li>Worked with product managers and UI/UX designers to refine customer-facing features from user feedback, <strong>raising customer satisfaction by 25%</strong>.</li>
+              <li>Own production deployments of Angular and Node.js applications: environment configuration, release rollouts, monitoring and post-release fixes.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <span class="dot"></span>
+          <div>
+            <div class="job-head"><h3>Software Developer</h3><span class="when">Jun 2023 – Dec 2024</span></div>
+            <div class="org">SHLR Technosoft Pvt Ltd</div>
+            <ul>
+              <li>Built full-stack web applications with Angular and Node.js/Express.js, <strong>improving responsiveness by 30%</strong> across desktop and mobile.</li>
+              <li>Developed REST APIs integrating PostgreSQL with the Angular front end, <strong>improving response times by 30%</strong>.</li>
+              <li>Automated build and release workflows with Git and CI/CD pipelines, <strong>speeding up deployments by 35%</strong> and reducing cross-environment integration issues.</li>
+              <li>Worked with Design, QA and DevOps in an Agile team, <strong>cutting feature delivery time by 25%</strong>.</li>
+              <li>Delivered four responsive, performance-focused static websites in ASP.NET MVC.</li>
+              <li>Deployed and maintained applications on production servers, managing configuration, releases and post-deployment fixes.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="label">Projects</div>
+    <div class="body">
+      <h2>Selected projects</h2>
+      <div class="projects">
+        <article class="card project wide">
+          <span class="tag">Algorithmic trading</span>
+          <h3>Gold (XAUUSD) Trading Bot</h3>
+          <p>An automated Expert Advisor with EMA-based grid engines across multiple timeframes, trailing take-profit, separate buy/sell basket closing and distance-based order spacing. Refined over 30+ versions through strategy-tester backtesting.</p>
+          <div class="chips"><span class="chip">MQL5</span><span class="chip">MetaTrader 5</span></div>
+        </article>
+        <article class="card project">
+          <h3>Service Booking &amp; Management Platform</h3>
+          <p>Dedicated user and admin panels with registration and login, service listings, bookings, wallet, referrals and bank account management.</p>
+          <div class="chips"><span class="chip">Angular</span><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">MongoDB</span><span class="chip">JWT</span></div>
+        </article>
+        <article class="card project">
+          <h3>Trading Platform</h3>
+          <p>A web-based trading platform with a decoupled frontend and REST API backend, deployed to production.</p>
+          <div class="chips"><span class="chip">Angular</span><span class="chip">Node.js</span><span class="chip">REST</span></div>
+        </article>
+        <article class="card project">
+          <h3>Real-Time Chat App</h3>
+          <p>A real-time messaging application built on WebSockets and Redis.</p>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">Node.js</span><span class="chip">Redis</span><span class="chip">WebSockets</span></div>
+        </article>
+        <article class="card project">
+          <h3>E-commerce Web Application</h3>
+          <p>A full-stack online shopping application.</p>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div>
+        </article>
+        <article class="card project wide">
+          <h3>Secure Authentication System</h3>
+          <p>A full-stack JWT-based authentication system.</p>
+          <div class="chips"><span class="chip">Angular</span><span class="chip">Node.js</span><span class="chip">JWT</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="label">Education</div>
+    <div class="body">
+      <h2>Education &amp; certifications</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Bachelor of Engineering</h3>
+          <div class="sub">PES College of Engineering</div>
+          <div class="meta">Mandya, India · Aug 2022</div>
+        </div>
+        <div class="card">
+          <h3>Angular Developer Certification</h3>
+          <div class="sub">Udemy</div>
+        </div>
+        <div class="card">
+          <h3>Full-Stack Developer Certification</h3>
+          <div class="sub">Kodnest</div>
+          <div class="meta">Angular, Java, Python, MySQL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="label">Contact</div>
+    <div class="body">
+      <h2>Let's talk</h2>
+      <p class="lead">Open to conversations about full-stack roles and projects.</p>
+      <div class="facts">
+        <div class="fact"><small>Email</small><span><a href="mailto:venugopalkm834@gmail.com">venugopalkm834@gmail.com</a></span></div>
+        <div class="fact"><small>Phone</small><span>+91-7899910568</span></div>
+        <div class="fact"><small>LinkedIn</small><span><a href="https://www.linkedin.com/in/venugopal-k-m-68626325b/" target="_blank" rel="noopener">linkedin.com/in/venugopal-k-m-68626325b</a></span></div>
+        <div class="fact"><small>GitHub</small><span><a href="https://github.com/venugopal305" target="_blank" rel="noopener">github.com/venugopal305</a></span></div>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="Venugopal_KM_Resume.pdf" target="_blank" rel="noopener">View resume</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Venugopal K M</span>
+    <span>Full-Stack Developer · Bengaluru, India</span>
+  </footer>
+</main>
+<script>
+(function () {
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem("vk-theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    var dark = root.getAttribute("data-theme") === "dark" ||
+      (!root.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("vk-theme", next); } catch (e) {}
+  });
+})();
+</script>
